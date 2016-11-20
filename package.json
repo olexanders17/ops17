@@ -1,0 +1,22 @@
+{
+  "name": "ops17",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "angular": "^1.5.8",
+    "express": "^4.14.0",
+    "foundation-sites": "^6.2.4",
+    "mongod": "^1.3.0",
+    "mongoose": "^4.6.7",
+    "underscore": "^1.8.3",
+    "xlsx": "^0.8.0"
+  }
+}
