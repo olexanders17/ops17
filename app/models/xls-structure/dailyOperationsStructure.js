@@ -1,6 +1,8 @@
 module.exports = {
+    _path:'/inbox/1.xlsx',
     _wsn: 'Daily activities',
     _frd: 3,
+    _lrd: 18000,
     _fmt: {
         'C': 'date'
     },
@@ -28,12 +30,5 @@ module.exports = {
         'V': 'chemicalUsage',
         'X': 'harvestYear'
     },
-
-    structure: {
-        fields: {fieldCode: "", fieldTotalArea: ""},
-        tractor: {tractorModel: '', tractorRegNumber: '', tractorDriverName: ''}
-
-    }
-
 
 };

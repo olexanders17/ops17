@@ -4,15 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "SET NODE_ENV=test && mocha test/**.*test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "supertest": "^3.0.0"
+  },
   "dependencies": {
     "angular": "^1.5.8",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-fileupload": "0.0.5",
     "foundation-sites": "^6.2.4",
     "mongod": "^1.3.0",
     "mongoose": "^4.6.7",

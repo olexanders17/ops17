@@ -1,0 +1,81 @@
+[
+  {
+    "module": "№7",
+    "date": "2016-11-05T00:00:00.000+02:00",
+    "fieldCode": "F.LV.02.12.01",
+    "fieldTotalArea": 83,
+    "doneHa": 10,
+    "tractorModel": "РОСА",
+    "tractorRegNumber": "30144АВ",
+    "tractorDriverName": "Медведев В",
+    "dieselUsage": 19,
+    "dieselUsagePerHa": 1.9,
+    "cropName": "WB",
+    "chemicalName": "Базагран",
+    "chemicalUsage": 20
+  },
+
+
+  {
+    "module": "№7",
+    "date": "2016-11-05T00:00:00.000+02:00",
+    "fieldCode": "F.LV.02.12.02",
+    "fieldTotalArea": 83,
+    "doneHa": 10,
+    "tractorModel": "РОСА",
+    "tractorRegNumber": "30144АВ",
+    "tractorDriverName": "Медведев В",
+    "dieselUsagePerHa": 0,
+    "cropName": "WB",
+    "chemicalName": "Бентогран",
+    "chemicalUsage": 23
+  },
+
+
+  {
+    "module": "№7",
+    "date": "2016-11-05T00:00:00.000+02:00",
+    "fieldCode": "F.LV.02.12.02",
+    "fieldTotalArea": 83,
+    "doneHa": 70,
+    "tractorModel": "РОСА",
+    "tractorRegNumber": "30144АВ",
+    "tractorDriverName": "Медведев В",
+    "dieselUsagePerHa": 0,
+    "cropName": "WB",
+    "chemicalName": "Стомп",
+    "chemicalUsage": 140
+  },
+
+
+  {
+    "module": "№7",
+    "date": "2016-11-05T00:00:00.000+02:00",
+    "fieldCode": "F.LV.02.12.02",
+    "fieldTotalArea": 83,
+    "doneHa": 50,
+    "tractorModel": "РОСА",
+    "tractorRegNumber": "30144АВ",
+    "tractorDriverName": "Медведев В",
+    "dieselUsagePerHa": 0,
+    "cropName": "WB",
+    "chemicalName": "Меззо",
+    "chemicalUsage": 0.3
+  },
+
+
+  {
+    "module": "№7",
+    "date": "2016-11-05T00:00:00.000+02:00",
+    "fieldCode": "F.LV.02.12.02",
+    "fieldTotalArea": 83,
+    "doneHa": 70,
+    "tractorModel": "РОСА",
+    "tractorRegNumber": "30144АВ",
+    "tractorDriverName": "Медведев В",
+    "dieselUsagePerHa": 0,
+    "cropName": "WB",
+    "chemicalName": "Тренд",
+    "chemicalUsage": 7
+  }
+]

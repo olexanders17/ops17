@@ -1,100 +1,70 @@
 var XLSX = require('xlsx');
 var fs = require('fs');
-
-//Модуль	Дата	Номер поля	Площа поля	Операція	Оброблено, га	Трактор	Реєстраційний номер	Тракторист	Мотогодини	Причепне обладнання	Серійний номер	Пальне	л/га	Культура	Сорт насіння	Використано насіння, кг	Вид добрив	Використано добрив, кг	Вид хімікату	Використано хімікату, кг/л	Допоміжний стовпчик	Рік збору урожаю
-
-/*opts = {
-    _wsn: 'Daily activities',
-    _frd: 3,
-    _fmt: {
-        'C': 'date'
-    },
-
-    'B': 'module',
-    'C': 'date',
-    'D': 'fieldCode',
-    'E': 'fieldTotalArea',
-    'G': 'doneHa',
-    'H': 'tractorModel',
-    'I': 'tractorRegNumber',
-    'J': 'tractorDriverName',
-    'K': 'motoHours',
-    'L': 'tillageEqupmentName',
-    'M': 'tillageEqupmentRegNumber',
-    'N': 'dieselUsage',
-    'O': 'dieselUsagePerHa',
-    'P': 'cropName',
-    'Q': 'seedName',
-    'R': 'seedUsage',
-    'S': 'ferlilizerName',
-    'T': 'ferlilizerUsage',
-    'U': 'chemicalName',
-    'V': 'chemicalUsage',
-    'X': 'harvestYear'
+var pathN = require('path');
 
 
-};*/
+
+function parser(opts, path) {
+// todo make deafault and non default path used to testing
+    var pathToFile = path;
+    if (!pathToFile) {
+        pathToFile = pathN.join(process.cwd(), opts._path);
+    }
 
 
-function parser(path, opts) {
+    //var serverPath = process.cwd();
 
-   // console.log(path);
-    var bstr = fs.readFileSync(path, "binary");
 
-    var workbook = XLSX.read(bstr, {type: "binary"});
+    console.log("parser :", "pathToFile=", pathToFile);
+
+    var file = fs.readFileSync(pathToFile, "binary");
+    var workbook = XLSX.read(file, {type: "binary"});
     var worksheet = workbook.Sheets[opts._wsn];
 
     var arr = [];
-    for (var i = opts._frd; i < 20; i++) {
+    for (var i = opts._frd; i < opts._lrd; i++) {
         var obj = {};
         var isEmptyObj = true;
+        var mapping = opts.mapping;
+        var formats = opts._fmt || {};
 
-        for (z in opts) {
-            var cell = worksheet[z + i];
-            var isFormatted = false;
+        for (var m in mapping) {
+            var cell = worksheet[m + i];
+
             if (cell) {
+                var structure = mapping[m];
 
-                //special fomat
-                for (s in opts._fmt) {
-                    if (z == s) {
+                //special format
+                if (formats[m]) {
+                    switch (formats[m]) {
+                        case "date": {
+                            obj[structure] = new Date(cell.w);
 
-                        switch (opts._fmt[s]) {
-                            case 'date' :
-                                //TODO:change data  lag
-                                obj[opts[z]] = new Date(cell.w);
-                                //console.log('cell.v', cell.v);
-                                isFormatted = true;
-                                break;
+                            break;
                         }
                     }
-                }
 
-                // standard format
-                if (!(isFormatted)) {
-                    obj[opts[z]] = cell.v;
-                    isEmptyObj = false;
+                }
+                //standard format
+                else {
+                    obj[structure] = cell.v;
+
+
                 }
 
 
             }
-        }
 
-        if (!(isEmptyObj)) {
+        }
+        if (Object.keys(obj).length > 0) {
             arr.push(obj);
         }
 
 
     }
-
-
-    // console.log(arr);
     return arr;
 
 }
-
-/*var path = __dirname + "\\" + "1.xlsx";
-
-parser(path, opts);*/
 
 
 module.exports = parser;

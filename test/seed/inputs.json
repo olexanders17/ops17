@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Базагран ",
+    "nameBudget": "(Chemicals) Bazagran",
+    "priceUSD": 151.786086956522,
+    "type": "Chemicals.herbicide"
+  },
+
+
+  {
+    "name": "Акратос ел.",
+    "nameBudget": "(Seeds) WW Akratos el",
+    "priceUSD": 1744.64285714286,
+    "type": "Seed.Winer wheat"
+  },
+
+
+  {
+    "name": "Брентано",
+    "nameBudget": "(Seeds) OSR Brentano",
+    "priceUSD": 101.554347826087,
+    "type": "Seed.Winter rapeseed"
+  },
+
+
+  {
+    "name": "династі",
+    "nameBudget": "(Seeds) OSR Dynastie",
+    "priceUSD": 168.409266409266,
+    "type": "Seed.Winter rapeseed"
+  },
+
+
+  {
+    "name": "Ексоцет",
+    "nameBudget": "(Seeds) OSR Ecotset",
+    "priceUSD": 158.905423280423,
+    "type": "Seed.Winter rapeseed"
+  }
+]
