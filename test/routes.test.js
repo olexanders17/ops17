@@ -65,7 +65,7 @@ describe("GET /api/load/inputs", function () {
             .expect(200)
             .expect(function (res) {
                 expect(res.body.length, "lenght").to.be.eql(110);
-                expect(doper[0].nameBudget).to.eql(res.body[0].nameBudget)
+                expect(doperJSON[0].nameBudget).to.eql(res.body[0].nameBudget)
 
 
             })
