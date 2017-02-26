@@ -8,10 +8,11 @@ var dailyOperationProcessing = require('./../utils/utils').dailyOperationProcess
 
 var xlsParser = require('./../xls/xls-parser');
 var path = require('path');
+var _ = require("lodash")
 
 
 module.exports = function (app) {
-
+// daily operations >>>
     app.get("/api/dailyOperations", function (req, res) {
 
         DailyOperationsModel.find({})
@@ -23,8 +24,6 @@ module.exports = function (app) {
             })
 
     });
-
-
     //load daily operations without pricing
     app.get('/api/load/dailyOperations', function (req, res) {
         console.log(process.cwd());
@@ -53,7 +52,6 @@ module.exports = function (app) {
                 return InputModel.find({})
                     .then(function (inputs) {
 
-                        //todo: put funcction and return result
 
                         var objDO = JSONs.parse(JSON.stringify(inputs));
                         //var objDO = inputs.toObject();
@@ -82,6 +80,20 @@ module.exports = function (app) {
 
     })
 
+// daily operations <<<
+
+    // inputs >>>
+
+    app.get('/api/inputs', function (req, res) {
+        InputModel.find({})
+            .then(function (data) {
+                res.send(data);
+            })
+            .catch(function (err) {
+                res.send({err});
+            })
+
+    })
 
     //load to
     app.get('/api/load/inputs', function (req, res) {
@@ -98,6 +110,43 @@ module.exports = function (app) {
         });
 
     });
+
+
+    app.get('/api/pricing/inputs', function (req, res) {
+
+
+        var DoListPromise = DailyOperationsModel.find({});
+        var inputsPromise = InputModel.find({});
+
+        return Promise.all([DoListPromise, inputsPromise])
+            .then(function (values) {
+
+                //var obj11 = values[0].toJSON();
+                var dOUpdated = dailyOperationProcessing(values[0], values[1].toObject());
+                //todo make update operations using model functions
+                console.log(" :", "t=");
+
+                dOUpdated.forEach(function (el) {
+                    var DoExeptId = _.omit(el, ["_id"])
+                    DailyOperationsModel.findByIdAndUpdate(el._id, {$set: DoExeptId}, {new: true})
+                        .then(function (data) {
+                            console.log(" :", "data=", data);
+                        })
+                });
+
+
+                return res.send({
+                    data: dOUpdated
+                });
+            })
+            .catch(function (err) {
+                res.status(400).send({err});
+            })
+
+    })
+
+
+// inputs <<<
 
 
 }

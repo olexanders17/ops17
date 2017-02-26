@@ -1,26 +1,41 @@
-var _ = require('underscore');
+/*
+cartesian=require('cartesian');
 
+arr = {
+    a: "012346".split(""),
+    b: "zxcvbn".split(""),
+    c: "вапрол".split("")
 
-obj = {
-    a1: {
-        a2: ""
-    }
+}
+
+arr2 = [];
+for (var key in arr) {
+    arr2.push(arr[key])
 }
 
 
-function assignInnerKey(obj, key, value) {
-    for (k in obj) {
-        if (k === key) {
-            obj[k] = value;
-        }
+console.log(" :", "arr2=", arr2);
 
-
-        if (typeof obj === "object") {
-            assignInnerKey(obj, key, value);
-
-        }
-
+for (var i = 0; i < arr2.length; i++) {
+    var inArr = arr2[i];
+    for (var j = 1; j < arr2.length; j++) {
 
     }
+
 }
+
+
+var res =cartesian(arr)
+console.log(" :", "res=", res);*/
+
+
+function fn(txt) {
+    console.log(typeof  txt);
+
+};
+
+
+fn(function () {
+    
+})
 

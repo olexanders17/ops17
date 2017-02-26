@@ -3,19 +3,13 @@ var fs = require('fs');
 var pathN = require('path');
 
 
-
 function parser(opts, path) {
-// todo make deafault and non default path used to testing
+
     var pathToFile = path;
     if (!pathToFile) {
         pathToFile = pathN.join(process.cwd(), opts._path);
     }
 
-
-    //var serverPath = process.cwd();
-
-
-    console.log("parser :", "pathToFile=", pathToFile);
 
     var file = fs.readFileSync(pathToFile, "binary");
     var workbook = XLSX.read(file, {type: "binary"});
@@ -45,9 +39,16 @@ function parser(opts, path) {
                     }
 
                 }
+
+                //todo v w check actions
                 //standard format
                 else {
-                    obj[structure] = cell.v;
+
+                    if (cell.t === "n") {
+                        obj[structure] = Math.round(cell.v * 1000) / 1000;
+                    } else {
+                        obj[structure] = cell.v;
+                    }
 
 
                 }

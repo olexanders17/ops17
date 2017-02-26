@@ -1,8 +1,8 @@
 module.exports = {
-    _path:'/inbox/1.xlsx',
+    _path:'/inbox/ops.xlsx',
     _wsn: 'Daily activities',
     _frd: 3,
-    _lrd: 18000,
+    _lrd: 1500,
     _fmt: {
         'C': 'date'
     },

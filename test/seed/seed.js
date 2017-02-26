@@ -29,4 +29,16 @@ var popoulateInputs = function (done) {
 }
 
 
-module.exports = {popoulateDailyOperations, popoulateInputs}
+var clearDailyOperations = function (done) {
+    DailyOperationModel.remove({})
+        .then(function () {
+                done();
+
+            }
+        )
+
+
+}
+
+
+module.exports = {popoulateDailyOperations, popoulateInputs,clearDailyOperations}

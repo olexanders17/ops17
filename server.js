@@ -19,27 +19,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 routes(app);
 
 
-/*app.post('/upload', function (req, res, next) {
- var sampleFile;
-
- if (!req.files) {
- res.send('No files were uploaded.');
- return;
- }
- console.log(req);
- sampleFile = req.files.sampleFile;
- sampleFile.mv(__dirname + '/inbox/filename.xlsx', function (err) {
- if (err) {
- res.status(500).send(err);
- }
- else {
- res.send('File uploaded!');
- }
- });
- });*/
 
 
-app.listen(3000, function () {
+app.listen(process.env.PORT, function () {
     console.log('listening on port 3000');
 })
 

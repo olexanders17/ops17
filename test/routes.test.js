@@ -1,10 +1,11 @@
 var chai = require('chai');
 var {expect}=require('chai');
 var chaiHttp = require('chai-http');
-
+var rewire = require('rewire');
 var request = require('supertest');
+
 var app = require('../server');
-var {popoulateDailyOperations, popoulateInputs}=require('./seed/seed');
+var {popoulateDailyOperations, popoulateInputs, clearDailyOperations}=require('./seed/seed');
 var doperJSON = require('./seed/dailyOperations');
 var inputsJSON = require('./seed/inputs.json');
 
@@ -77,5 +78,23 @@ describe("GET /api/load/inputs", function () {
 })
 
 
+// todo use sinon
+describe("GET /api/load/dailyOperations ", function () {
+    it("should load and return valid data", function () {
+        beforeEach(clearDailyOperations);
+        var xlsParser = rewire('./../xls/xls-parser');
+        xlsParser.__set__("xlsParser");
+        request(app)
+            .get('/api/load/dailyOperations')
+            .expect(200)
+            .expect(function (res) {
 
+
+            })
+            .end(done)
+
+
+    })
+
+})
 
