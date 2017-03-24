@@ -8,7 +8,12 @@ var dailyOperationProcessing = require('./../utils/utils').dailyOperationProcess
 
 var xlsParser = require('./../xls/xls-parser');
 var path = require('path');
-var _ = require("lodash")
+var _ = require("lodash");
+var forEach = require('async-foreach').forEach;
+
+
+var pathLoad = process.env.NODE_ENV === "test" ?
+    path.join(process.cwd(), process.env.PATH_TEST_XLS) : undefined;
 
 
 module.exports = function (app) {
@@ -26,11 +31,11 @@ module.exports = function (app) {
     });
     //load daily operations without pricing
     app.get('/api/load/dailyOperations', function (req, res) {
-        console.log(process.cwd());
+        console.log(process.env.NODE_ENV);
 
         DailyOperationsModel.remove({}, function (err, data) {
             if (err)throw err;
-            var rez = xlsParser(dailyOperationsStructure);
+            var rez = xlsParser(dailyOperationsStructure, pathLoad);
             DailyOperationsModel.insertMany(rez, function (err, data) {
                 if (err)throw err;
                 res.send(data);
@@ -120,28 +125,39 @@ module.exports = function (app) {
 
         return Promise.all([DoListPromise, inputsPromise])
             .then(function (values) {
+                var dopArr = values[0];
+                var inpArr = values[1];
 
-                //var obj11 = values[0].toJSON();
-                var dOUpdated = dailyOperationProcessing(values[0], values[1].toObject());
-                //todo make update operations using model functions
-                console.log(" :", "t=");
 
-                dOUpdated.forEach(function (el) {
-                    var DoExeptId = _.omit(el, ["_id"])
-                    DailyOperationsModel.findByIdAndUpdate(el._id, {$set: DoExeptId}, {new: true})
-                        .then(function (data) {
-                            console.log(" :", "data=", data);
-                        })
+                forEach(dopArr,function (dopEl) {
+                       console.log(" :", "dopEl=", dopEl.chemicalName);
+                    // todo update pricng !!!!
+
+                    return InputModel.findByName(dopEl.chemicalName, function (err, inpEl) {
+                        if (inpEl) {
+                            dopEl._chemical = inpEl._id
+                            console.log(" :", "dopEl=", dopEl);
+                            dopEl.save();
+
+                        }
+
+                    })
+
+
+
+
+
                 });
 
 
-                return res.send({
-                    data: dOUpdated
-                });
             })
+
+
             .catch(function (err) {
+                console.log(" :", "err=", err);
                 res.status(400).send({err});
             })
+
 
     })
 

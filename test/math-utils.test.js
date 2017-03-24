@@ -32,7 +32,7 @@ var arrOfObj = [{"color": "red", "fire": "rare", "price1": 10, "price2": 98},
 var summedKeys = ["color", "fire"];
 var summedAmount = ["price1", "price2"];
 
-describe.only("#sumIf", function () {
+describe("#sumIf", function () {
     it("should return proper array with grouped amounts ", function () {
         var res = sumIf(arrOfObj, summedKeys, summedAmount);
 

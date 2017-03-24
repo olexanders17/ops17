@@ -1,13 +1,13 @@
 var chai = require('chai');
-var {expect}=require('chai');
+var {expect} = require('chai');
 var chaiHttp = require('chai-http');
 var rewire = require('rewire');
 var request = require('supertest');
 
-var app = require('../server');
-var {popoulateDailyOperations, popoulateInputs, clearDailyOperations}=require('./seed/seed');
-var doperJSON = require('./seed/dailyOperations');
-var inputsJSON = require('./seed/inputs.json');
+var app = require('../../server');
+var {popoulateDailyOperations, popoulateInputs, clearDailyOperations} = require('./../_seed/seed');
+var doperJSON = require('./../_seed/dailyOperations');
+var inputsJSON = require('./../_seed/inputs.json');
 
 chai.use(chaiHttp);
 
@@ -44,16 +44,7 @@ describe("GET /api/dailyOperations", function () {
     })
 
 
-    /* it("should  back  daily operations 2", function (done) {
-     chai.request(app)
-     .get('/api/dailyOperations')
-     .end(function (err, res) {
-     expect(res.status).to.be.eql(200)
-     done()
-     })
 
-     })
-     */
 
 })
 
@@ -66,7 +57,7 @@ describe("GET /api/load/inputs", function () {
             .expect(200)
             .expect(function (res) {
                 expect(res.body.length, "lenght").to.be.eql(110);
-                expect(doperJSON[0].nameBudget).to.eql(res.body[0].nameBudget)
+                expect(doperJSON[0].nameBudget).to.be.eql(res.body[0].nameBudget)
 
 
             })
@@ -80,18 +71,21 @@ describe("GET /api/load/inputs", function () {
 
 // todo use sinon
 describe("GET /api/load/dailyOperations ", function () {
-    it("should load and return valid data", function () {
+    it("should load and return valid data", function (done) {
         beforeEach(clearDailyOperations);
-        var xlsParser = rewire('./../xls/xls-parser');
-        xlsParser.__set__("xlsParser");
+
+
         request(app)
             .get('/api/load/dailyOperations')
             .expect(200)
             .expect(function (res) {
 
 
+                expect(res.body[0].chemicalName).to.be.eql("Тренд2");
+
+
             })
-            .end(done)
+            .end(done);
 
 
     })
